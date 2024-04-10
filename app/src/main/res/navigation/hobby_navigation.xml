@@ -49,6 +49,9 @@
         <action
             android:id="@+id/actionSettingFragment_R"
             app:destination="@id/settingFragment" />
+        <argument
+            android:name="mangaId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"

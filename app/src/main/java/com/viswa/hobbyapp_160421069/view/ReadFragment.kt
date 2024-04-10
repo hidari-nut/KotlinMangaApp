@@ -1,60 +1,94 @@
 package com.viswa.hobbyapp_160421069.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 import com.viswa.hobbyapp_160421069.R
+import com.viswa.hobbyapp_160421069.databinding.FragmentReadBinding
+import com.viswa.hobbyapp_160421069.model.Blog
+import com.viswa.hobbyapp_160421069.viewmodel.MangaDetailViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReadFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReadFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var viewModel:MangaDetailViewModel
+    private lateinit var binding: FragmentReadBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private  var pageCount = 1
+    private var currentPage = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_read, container, false)
-    }
+        binding = FragmentReadBinding.inflate(inflater, container, false)
+        return binding.root }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReadFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReadFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mangaId = ReadFragmentArgs.fromBundle(requireArguments()).mangaId
+        viewModel = ViewModelProvider(this).get(MangaDetailViewModel::class.java)
+        viewModel.fetch(mangaId)
+
+        observeViewModel()
+        binding.btnNext.setOnClickListener {
+            if(currentPage+1 < pageCount){
+                currentPage ++
+                observeViewModel()
+            }
+            disabblingButtons()
+        }
+        binding.btnPrev.setOnClickListener {
+            if(currentPage > 0){
+                currentPage --
+                observeViewModel()
+            }
+            disabblingButtons()
+        }
+    }
+    fun observeViewModel(){
+        viewModel.mangaLD.observe(viewLifecycleOwner, Observer { manga ->
+            manga?.let {
+                if (manga.cont != null) {
+                    Picasso.get().load(manga.picUrl).into(binding.imgBlogD)
+                    binding.txtTitleD.text = manga.title
+                    binding.textUserD.text = manga.writer
+                } else {
+                    Log.d("ReadFragment", "Manga Data: $manga")
                 }
             }
+        })
+        viewModel.paragraphLD.observe(viewLifecycleOwner, Observer{
+            Log.d("ReadParagraph", "Paragraph Data: ${it.toString()}")
+            binding.txtContent.text = it[currentPage]
+            pageCount = it.size
+
+            disabblingButtons()
+        })
+    }
+
+    private fun disabblingButtons(){
+
+        if(currentPage+1 >= pageCount){
+            binding.btnNext.isEnabled=false
+        }
+        else{
+            binding.btnNext.isEnabled=true
+        }
+        if(currentPage <= 0){
+            binding.btnPrev.isEnabled=false
+        }
+        else{
+            binding.btnPrev.isEnabled=true
+        }
     }
 }
