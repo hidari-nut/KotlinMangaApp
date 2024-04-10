@@ -9,5 +9,54 @@
         android:id="@+id/loginFragment"
         android:name="com.viswa.hobbyapp_160421069.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/actionSignUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/actionHomeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.viswa.hobbyapp_160421069.view.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/actionLoginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.viswa.hobbyapp_160421069.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/actionReadFragment"
+            app:destination="@id/readFragment" />
+        <action
+            android:id="@+id/actionSettingFragment_H"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readFragment"
+        android:name="com.viswa.hobbyapp_160421069.view.ReadFragment"
+        android:label="fragment_read"
+        tools:layout="@layout/fragment_read" >
+        <action
+            android:id="@+id/actionHomeFragment_R"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/actionSettingFragment_R"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.viswa.hobbyapp_160421069.view.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/actionLogoutFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
