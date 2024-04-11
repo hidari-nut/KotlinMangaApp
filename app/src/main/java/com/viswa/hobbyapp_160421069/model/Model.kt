@@ -2,7 +2,8 @@ package com.viswa.hobbyapp_160421069.model
 
 import com.google.gson.annotations.SerializedName
 
-data class User(@SerializedName("id")
+data class User(
+                @SerializedName("id")
                 var id:Int,
                 @SerializedName("username")
                 var uname:String?,
@@ -25,5 +26,5 @@ data class Blog( @SerializedName("id")
                 var picUrl:String?,
                 @SerializedName("contents")
                 var cont:String,
-                 @SerializedName("first_name")
+                 @SerializedName("full_name")
                  var writer:String?)

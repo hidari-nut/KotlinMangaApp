@@ -16,6 +16,9 @@
             android:layout_width="409dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegister">
@@ -24,10 +27,7 @@
                 android:id="@+id/txtUsernameR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Username" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,6 +35,9 @@
             android:id="@+id/pwdLayoutR"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/unameLayoutR">
@@ -43,10 +46,7 @@
                 android:id="@+id/txtPasswordR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Password"
                 android:password="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -55,6 +55,9 @@
             android:id="@+id/pwdConfLayoutR"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwdLayoutR">
@@ -63,10 +66,7 @@
                 android:id="@+id/txtPasswordConfirmR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Confirm Password"
                 android:password="true" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,6 +75,9 @@
             android:id="@+id/fNameLayoutR"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwdConfLayoutR">
@@ -83,10 +86,7 @@
                 android:id="@+id/txtFirstNameR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="First Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +94,9 @@
             android:id="@+id/lNameLayoutR"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fNameLayoutR">
@@ -102,10 +105,6 @@
                 android:id="@+id/txtLastNameR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Last Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,6 +112,9 @@
             android:id="@+id/urlLayoutR"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lNameLayoutR">
@@ -121,10 +123,7 @@
                 android:id="@+id/txtPhotoUrlR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:hint="Photo URL" />
         </com.google.android.material.textfield.TextInputLayout>
 

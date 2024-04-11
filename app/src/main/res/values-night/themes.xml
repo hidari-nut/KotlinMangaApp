@@ -1,5 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBarTitle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize other attributes as needed -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="Theme.HobbyApp_160421069" parent="Theme.Material3.Dark">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>

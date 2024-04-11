@@ -8,19 +8,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.viswa.hobbyapp_160421069.R
 import com.viswa.hobbyapp_160421069.databinding.FragmentLoginBinding
 import com.viswa.hobbyapp_160421069.viewmodel.UsersViewModel
 
 class LoginFragment : Fragment() {
-    private lateinit var binding:FragmentLoginBinding
-    private val viewModel: UsersViewModel by viewModels()
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var viewModel: UsersViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        viewModel = (activity as MainActivity).getUserVM()
         return binding.root
     }
 
@@ -34,17 +37,16 @@ class LoginFragment : Fragment() {
             Navigation.findNavController(it).navigate(action)
         }
 
-        btnLogIn.setOnClickListener{
+        btnLogIn.setOnClickListener {loginData ->
             val username = binding.txtUsernameL.text.toString()
             val password = binding.txtPasswordL.text.toString()
 
-            viewModel.loginUser(username, password, { firstName ->
+            viewModel.loginUser(username, password, {
                 val action = LoginFragmentDirections.actionHomeFragment()
-                Navigation.findNavController(it).navigate(action)
-            }, { errorMessage ->
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(loginData).navigate(action)
+            }, {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             })
         }
     }
-
 }

@@ -1,31 +1,85 @@
 package com.viswa.hobbyapp_160421069.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import com.squareup.picasso.Picasso
 import com.viswa.hobbyapp_160421069.R
+import com.viswa.hobbyapp_160421069.databinding.FragmentSettingBinding
+import com.viswa.hobbyapp_160421069.model.User
+import com.viswa.hobbyapp_160421069.viewmodel.UsersViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SettingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SettingFragment : Fragment() {
-
+    private lateinit var viewModel: UsersViewModel
+    private lateinit var binding: FragmentSettingBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        binding = FragmentSettingBinding.inflate(inflater, container, false)
+        return binding.root  }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = (activity as MainActivity).getUserVM()
+
+        observeViewModel()
+
+        val btnSave = view.findViewById<Button>(R.id.btnSave)
+        val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+
+        btnSave.setOnClickListener {
+            val user = viewModel.userLD.value
+            user?.let {
+                val id = it.id
+                val username = binding.txtUsername.text.toString()
+                val password = binding.txtPassword.text.toString()
+                val firstName = binding.txtFirstName.text.toString()
+                val lastName = binding.txtLastName.text.toString()
+                val photoUrl = binding.txtPhotoUrl.text.toString()
+
+                viewModel.updateUser(id, username, password, firstName, lastName, photoUrl)
+            }
+        }
+
+
+
+        btnLogout.setOnClickListener {
+            val action = SettingFragmentDirections.actionLogoutFragment()
+            Navigation.findNavController(it).navigate(action)
+            viewModel.clear()
+        }
     }
 
-
+    private fun observeViewModel(){
+        viewModel.userLD.observe(viewLifecycleOwner, Observer { user ->
+            user?.let {
+                if (user.id != null) {
+                    Picasso.get().load(user.profUrl).into(binding.imgProfile)
+                    binding.txtUsername.setText(user.uname)
+                    binding.txtFirstName.setText(user.fname)
+                    binding.txtLastName.setText(user.lname)
+                    binding.txtPassword.setText(user.pwd)
+                    binding.txtPasswordConfirm.setText(user.pwd)
+                    binding.txtPhotoUrl.setText(user.profUrl)
+                } else {
+                    Log.d("ReadFragment", "UserData: $user")
+                }
+            }
+        })
+        viewModel.userLD.observe(viewLifecycleOwner, Observer{
+            Log.d("UpdateUser", "UserData: ${it.toString()}")
+        })
+    }
 }
