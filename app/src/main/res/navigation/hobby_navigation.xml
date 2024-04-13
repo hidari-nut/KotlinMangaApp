@@ -23,13 +23,7 @@
         android:id="@+id/signUpFragment"
         android:name="com.viswa.hobbyapp_160421069.view.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/actionLoginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/signUpFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.viswa.hobbyapp_160421069.view.HomeFragment"

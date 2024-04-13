@@ -44,8 +44,7 @@ class SignUpFragment : Fragment() {
             if(password == binding.txtPasswordConfirmR.text.toString()){
                 viewModel.registerUser(user, {
                     Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
-                    val action = SignUpFragmentDirections.actionLoginFragment()
-                    Navigation.findNavController(view).navigate(action)
+                    Navigation.findNavController(view).navigateUp()
                 }, { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 })
