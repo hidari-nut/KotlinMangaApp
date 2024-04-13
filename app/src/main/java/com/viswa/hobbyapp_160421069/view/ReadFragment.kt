@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
 import com.viswa.hobbyapp_160421069.R
 import com.viswa.hobbyapp_160421069.databinding.FragmentReadBinding
@@ -53,6 +54,10 @@ class ReadFragment : Fragment() {
                 observeViewModel()
             }
             disabblingButtons()
+        }
+        binding.fabSetting.setOnClickListener{
+            val action = HomeFragmentDirections.actionSettingFragmentH()
+            Navigation.findNavController(it).navigate(action)
         }
     }
     fun observeViewModel(){

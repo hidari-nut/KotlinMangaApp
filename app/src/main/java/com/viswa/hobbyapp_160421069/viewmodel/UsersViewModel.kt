@@ -48,7 +48,7 @@ class UsersViewModel(application: Application,):AndroidViewModel(application) {
                 }
             },
             { error ->
-                onError(error.message ?: "Unknown error occurred")
+                onError(error.message ?: "Error occurred")
             }) {
             override fun getParams(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()

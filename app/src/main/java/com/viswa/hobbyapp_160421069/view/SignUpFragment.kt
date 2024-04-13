@@ -41,14 +41,19 @@ class SignUpFragment : Fragment() {
             val photoUrl = binding.txtPhotoUrlR.text.toString()
 
             val user = User(0,username, password, firstName, lastName, photoUrl)
+            if(password == binding.txtPasswordConfirmR.text.toString()){
+                viewModel.registerUser(user, {
+                    Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
+                    val action = SignUpFragmentDirections.actionLoginFragment()
+                    Navigation.findNavController(view).navigate(action)
+                }, { errorMessage ->
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                })
+            }
+            else{
+                Toast.makeText(requireContext(), "Password and the confirmation doesn't match", Toast.LENGTH_SHORT).show()
+            }
 
-            viewModel.registerUser(user, {
-                Toast.makeText(requireContext(), "Registration successful", Toast.LENGTH_SHORT).show()
-                val action = SignUpFragmentDirections.actionLoginFragment()
-                Navigation.findNavController(view).navigate(action)
-            }, { errorMessage ->
-                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-            })
         }
     }
 }
