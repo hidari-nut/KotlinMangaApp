@@ -42,6 +42,7 @@ class LoginFragment : Fragment() {
             val password = binding.txtPasswordL.text.toString()
 
             viewModel.loginUser(username, password, {
+                Toast.makeText(requireContext(), "Welcome " + username, Toast.LENGTH_SHORT).show()
                 val action = LoginFragmentDirections.actionHomeFragment()
                 Navigation.findNavController(loginData).navigate(action)
             }, {

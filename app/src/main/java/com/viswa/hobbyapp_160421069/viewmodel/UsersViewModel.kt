@@ -96,7 +96,7 @@ class UsersViewModel(application: Application,):AndroidViewModel(application) {
         queue?.add(stringRequest)
     }
 
-    fun updateUser(id: Int, username: String, password: String, fname:String, lname:String, photo_url:String) {
+    fun updateUser(id: Int, username: String, password: String, fname:String, lname:String, photo_url:String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
         val url = "http://10.0.2.2/anmp/edit_user.php"
 
         val stringRequest = object : StringRequest(Method.POST, url,
@@ -105,19 +105,20 @@ class UsersViewModel(application: Application,):AndroidViewModel(application) {
                     val responseData = Gson().fromJson(it, Map::class.java)
                     if (responseData["result"] == "success") {
                         loginUser(username, password, { successMessage ->
+                            onSuccess("User updated successfully: $successMessage")
                         }, { errorMessage ->
-
+                            onError(errorMessage)
                         })
-
+                    } else {
+                        onError("User update failed")
                     }
                 } catch (e: Exception) {
-                    Log.e("Error", "Error Message: ${e.message}")
+                    onError("Error parsing response: ${e.message}")
                 }
             },
             {
-                Log.e("UpdateUserError", "Error: ${it.message}")
-               })
-        {
+                onError(it.message ?: "Unknown error occurred")
+            }) {
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
                 params["id"] = id.toString()
@@ -132,6 +133,7 @@ class UsersViewModel(application: Application,):AndroidViewModel(application) {
         stringRequest.tag = TAG
         queue?.add(stringRequest)
     }
+
     fun clear (){
         userLD = MutableLiveData()
         Log.d("Current Data",userLD.value.toString())

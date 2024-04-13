@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/hobby_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -12,9 +12,7 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/actionSignUpFragment"
-            app:destination="@id/signUpFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/actionHomeFragment"
             app:destination="@id/homeFragment"
@@ -39,13 +37,10 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/actionReadFragment"
-            app:destination="@id/readFragment"
-            app:popUpTo="@id/homeFragment" />
+            app:destination="@id/readFragment" />
         <action
             android:id="@+id/actionSettingFragment_H"
-            app:destination="@id/settingFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/readFragment"
@@ -54,12 +49,10 @@
         tools:layout="@layout/fragment_read" >
         <action
             android:id="@+id/actionHomeFragment_R"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/readFragment" />
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/actionSettingFragment_R"
-            app:destination="@id/settingFragment"
-            app:popUpTo="@id/readFragment" />
+            app:destination="@id/settingFragment" />
         <argument
             android:name="mangaId"
             app:argType="integer" />
@@ -72,7 +65,7 @@
         <action
             android:id="@+id/actionLogoutFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/settingFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

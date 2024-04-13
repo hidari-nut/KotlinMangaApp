@@ -50,7 +50,11 @@ class SettingFragment : Fragment() {
                 val photoUrl = binding.txtPhotoUrl.text.toString()
 
                 if(password == binding.txtPasswordConfirm.text.toString()) {
-                    viewModel.updateUser(id, username, password, firstName, lastName, photoUrl)
+                    viewModel.updateUser(id, username, password, firstName, lastName, photoUrl, {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    }, {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    })
                 }
                 else{
                     Toast.makeText(requireContext(), "Password and the confirmation doesn't match", Toast.LENGTH_SHORT).show()
