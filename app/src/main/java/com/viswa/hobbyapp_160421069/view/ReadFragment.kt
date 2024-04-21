@@ -56,7 +56,7 @@ class ReadFragment : Fragment() {
             disabblingButtons()
         }
         binding.fabSetting.setOnClickListener{
-            val action = HomeFragmentDirections.actionSettingFragmentH()
+            val action = ReadFragmentDirections.actionSettingFragmentR()
             Navigation.findNavController(it).navigate(action)
         }
     }
